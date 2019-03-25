@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Adnat</title>
+    <%= csrf_meta_tags %>
+
+
+  </head>
+
+  <body>
+	<% if current_user %>
+	  Logged in as <%= current_user.email %>
+	  <%= link_to 'logout', logout_path %>
+	<% else %>
+	  <%= link_to 'Sign Up', signup_path %> or 
+	  <%= link_to 'login', login_path %>
+	<% end %>
+	<p id=”notice”><%= notice %></p>
+    <%= yield %>
+  </body>
+</html>
