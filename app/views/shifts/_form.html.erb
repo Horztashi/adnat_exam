@@ -1,0 +1,27 @@
+<%= form_with(model: shift, local: true) do |form| %>
+
+<div>Employee: <%=@user.name %>(<%=@user.email %>)</div>
+<div>Organisation: <%=@organisation.name %></div>
+
+  <div class="field">
+    <%= form.label :shift_date %>
+    <%= form.date_field :shift_date %>
+  </div>
+  <div class="field">
+    <%= form.label :start %>
+    <%= form.time_field :start %>
+  </div>
+  <div class="field">
+    <%= form.label :finish %>
+    <%= form.time_field :finish %>
+  </div>
+
+  <div class="field">
+    <%= form.label :break %>
+    <%= form.number_field :break, step: 0.01 %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

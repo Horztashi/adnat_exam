@@ -1,0 +1,17 @@
+<%= form_with(model: organisation, local: true) do |form| %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name, id: :user_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :hour_rate %>
+    <%= form.number_field :hour_rate, value: number_to_currency(form.object.hour_rate.to_f, delimiter: '', unit: ''),step: :any %>
+  </div>
+
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

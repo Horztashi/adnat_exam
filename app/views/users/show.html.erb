@@ -1,14 +1,35 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Email:</strong>
-  <%= @user.email %>
+	<strong>Email:</strong>
+	<%= @user.email %>
 </p>
 
 <p>
-  <strong>Name:</strong>
-  <%= @user.name %>
+	<strong>Name:</strong>
+	<%= @user.name %>
 </p>
 
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+<p>
+	<%= @organisation.name unless @organisation == nil %>
+</p>
+<ul>
+	<% if @organisations != nil %>
+		<% @organisations.each do |organisation| %>
+			<li>
+				<%= organisation.name %>
+				<a href="">Edit</a>
+				<a href="">Join</a>
+			</li>
+		<% end %>
+	<% end %>
+</ul>
+<p>
+	<%= link_to 'New Organisation', new_organisation_path %>
+</p>
+<p>
+	<%= link_to 'Edit', edit_user_path(@user) %> |
+</p>
+<p>
+	<%= link_to 'Back', users_path %>
+</p>

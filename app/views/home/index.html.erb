@@ -1,2 +1,86 @@
-<h1>Example</h1>
-<p>Lorem ipsum …</p>
+<p id="notice"><%= notice %></p>
+
+<p>
+	<strong>Email:</strong>
+	<%= @user.email %>
+</p>
+
+<p>
+	<strong>Name:</strong>
+	<%= @user.name %> | <%= link_to 'Edit', edit_user_path(@user) %>
+</p>
+
+<% if @organisation != nil %>
+	<%= @organisation.name unless @organisation == nil %>
+	<div class = "btn btn-group">
+		<%= link_to 'Edit Organisation', edit_organisation_path(@organisation), class: 'btn btn-default' %>
+		<%= link_to 'Leave Organisation', leave_organisations_path_url, class: 'btn btn-default' %>
+		<%= link_to 'Add Shift', new_shift_path, class: 'btn btn-default' %>
+	</div>
+
+	<h3>Personal Shifts</h3>
+	<table class = 'table'>
+		<tr>
+			<th>Organisation Name</th>
+			<th>Shift Date</th>
+			<th>Shift Start</th>
+			<th>Shift End</th>
+			<th>Break Length(Minutes)</th>
+			<th>Hours Worked</th>
+			<th>Shift Cost</th>
+		</tr>
+
+		<% @user_shifts.each do |shift| %>
+			<tr>
+				<td><%= shift['organisation'] %></td>
+				<td><%= shift['shift_date'].to_s(:date) %></td>
+				<td><%= shift['start'].to_s(:time) %></td>
+				<td><%= shift['finish'].to_s(:time) %></td>
+				<td><%= shift['break'] %></td>
+				<td><%= shift['worked'] %></td>
+				<td><%= shift['cost'].to_f %></td>
+				<td><%= link_to 'Edit', edit_shift_path(shift['id']) %></td>
+			</tr>
+		<% end %>
+	</table>
+
+	<h3>Other Employee in Organisation Shifts</h3>
+	<table class = 'table'>
+		<tr>
+			<th>Employee Name</th>
+			<th>Shift Date</th>
+			<th>Shift Start</th>
+			<th>Shift End</th>
+			<th>Break Length(Minutes)</th>
+			<th>Hours Worked</th>
+			<th>Shift Cost</th>
+		</tr>
+		<% @organisation_shifts.each do |shift| %>
+			<tr>
+				<td><%= shift['nameemail'] %></td>
+				<td><%= shift['shift_date'].to_s(:date) %></td>
+				<td><%= shift['start'].to_s(:time) %></td>
+				<td><%= shift['finish'].to_s(:time) %></td>
+				<td><%= shift['break'] %></td>
+				<td><%= shift['worked'] %></td>
+				<td><%= shift['cost'].to_f %></td>
+				<td><%= link_to 'Edit', edit_shift_path(shift['id']) %></td>
+			</tr>
+		<% end %>
+	</table>
+
+<% end %>
+
+<% if @organisations != nil %>
+	<table class = 'table'>
+			<% @organisations.each do |organisation| %>
+				<tr>
+					<td><%= organisation.name %></td>
+					<td><%= link_to 'Edit', edit_organisation_path(organisation) %></td>
+					<td><%= link_to 'Join', join_organisations_path_url(organisation.id) %></td>
+				</tr>
+			<% end %>
+	<tr colspan='3'><%= link_to 'New Organisation', new_organisation_path %></tr>
+	</table>
+<% end %>
+
