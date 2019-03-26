@@ -1,17 +1,13 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-	<strong>Email:</strong>
-	<%= @user.email %>
-</p>
-
-<p>
-	<strong>Name:</strong>
-	<%= @user.name %> | <%= link_to 'Edit', edit_user_path(@user) %>
-</p>
+<div class="row">
+	<div class="col-md-2">Employee</div>
+	<div class="col-md-5"><%= link_to "#{@user.name} (#{@user.email})", edit_user_path(@user) %></div>
+	<div class="col-md-2">Organisation</div>
+	<div class="col-md-3"><%= @organisation.name unless @organisation == nil %></div>
+</div>
 
 <% if @organisation != nil %>
-	<%= @organisation.name unless @organisation == nil %>
 	<div class = "btn btn-group">
 		<%= link_to 'Edit Organisation', edit_organisation_path(@organisation), class: 'btn btn-default' %>
 		<%= link_to 'Leave Organisation', leave_organisations_path_url, class: 'btn btn-default' %>
@@ -44,7 +40,7 @@
 		<% end %>
 	</table>
 
-	<h3>Other Employee in Organisation Shifts</h3>
+	<h3>All Employee in Organisation Shifts</h3>
 	<table class = 'table'>
 		<tr>
 			<th>Employee Name</th>
